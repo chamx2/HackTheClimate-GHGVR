@@ -1,0 +1,37 @@
+#include <dht.h>
+
+
+int methaneGasSensor = A0;
+int DHTSensor = A1;
+int CarbonDioxide = 260; //static value
+int NitrousOxide = 100; //static value
+dht DHT;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(methaneGasSensor,INPUT);
+  pinMode(DHTSensor,INPUT);
+}
+
+void loop() {
+ int methaneGasValue = analogRead(methaneGasSensor);
+ int DHTData = DHT.read11(DHTSensor);
+  Serial.print(DHT.humidity);
+  Serial.print(",");
+  Serial.print(DHT.humidity);
+  Serial.print(",");
+  Serial.print(DHT.temperature);
+  Serial.print(",");
+  Serial.print(methaneGasValue);
+  methaneGasValue++;
+  Serial.print(",");
+  Serial.print(CarbonDioxide);
+  CarbonDioxide++;
+  Serial.print(",");
+  Serial.print(NitrousOxide++);
+  Serial.println();
+  while(!Serial.available());
+  while(Serial.available())
+  char in = Serial.read();  
+}
+
